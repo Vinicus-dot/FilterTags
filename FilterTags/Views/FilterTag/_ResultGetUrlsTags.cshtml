@@ -1,0 +1,63 @@
+﻿@using FilterTags.Model.Models
+
+@model List<Tag>
+
+<div id="tagsGetUrls" style="margin-top:30px;">
+
+    <span>
+        <a style="color:white">URL: </a>
+        <a>@ViewBag.UrlTag</a>
+    </span>
+ 
+    <div class="header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" href="javascript:void(0);" onclick="closeResultTags()">
+            <span aria-hidden="true">×</span>
+        </button>
+    </div>
+
+    <table id="tabela-dados-tag"  class="table tagsGetUrls">
+        <thead>
+            <tr>
+
+                <th scope="col">Tag</th>
+                <th scope="col">Quantidade</th>
+
+            </tr>
+        </thead>
+
+        <tbody>
+
+        </tbody>
+
+    </table>
+</div>
+
+<script>
+        var dadosArray = [];
+        @if (Model != null)
+        {
+            foreach (var tag in Model)
+            {
+                @:dadosArray.push({ "Tag": "@tag.Name", "Quantidade": @tag.Amount });
+            }
+        }
+
+
+        $(document).ready(function () {
+            $('#tabela-dados-tag').pagination({
+                dataSource: dadosArray,
+                pageSize: 8,
+                callback: function (data, pagination) {
+                    renderTable(data);
+                }
+            });
+
+            function renderTable(data) {
+                var html = '';
+                $.each(data, function (index, item) {
+                    html += '<tr><td>' + item.Tag + '</td><td>' + item.Quantidade + '</td></tr>';
+                });
+                $('#tabela-dados-tag tbody').html(html);
+            }
+        });
+</script>

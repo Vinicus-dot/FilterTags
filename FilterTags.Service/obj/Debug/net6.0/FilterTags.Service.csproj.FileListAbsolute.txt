@@ -1,0 +1,17 @@
+C:\Users\Vinícius\Documents\Code\TestePratico\FilterTags.Service\bin\Debug\net6.0\FilterTags.Service.deps.json
+C:\Users\Vinícius\Documents\Code\TestePratico\FilterTags.Service\bin\Debug\net6.0\FilterTags.Service.dll
+C:\Users\Vinícius\Documents\Code\TestePratico\FilterTags.Service\bin\Debug\net6.0\FilterTags.Service.pdb
+C:\Users\Vinícius\Documents\Code\TestePratico\FilterTags.Service\bin\Debug\net6.0\FilterTags.Model.dll
+C:\Users\Vinícius\Documents\Code\TestePratico\FilterTags.Service\bin\Debug\net6.0\FilterTags.Repository.dll
+C:\Users\Vinícius\Documents\Code\TestePratico\FilterTags.Service\bin\Debug\net6.0\FilterTags.Model.pdb
+C:\Users\Vinícius\Documents\Code\TestePratico\FilterTags.Service\bin\Debug\net6.0\FilterTags.Repository.pdb
+C:\Users\Vinícius\Documents\Code\TestePratico\FilterTags.Service\obj\Debug\net6.0\FilterTags.Service.csproj.AssemblyReference.cache
+C:\Users\Vinícius\Documents\Code\TestePratico\FilterTags.Service\obj\Debug\net6.0\FilterTags.Service.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Vinícius\Documents\Code\TestePratico\FilterTags.Service\obj\Debug\net6.0\FilterTags.Service.AssemblyInfoInputs.cache
+C:\Users\Vinícius\Documents\Code\TestePratico\FilterTags.Service\obj\Debug\net6.0\FilterTags.Service.AssemblyInfo.cs
+C:\Users\Vinícius\Documents\Code\TestePratico\FilterTags.Service\obj\Debug\net6.0\FilterTags.Service.csproj.CoreCompileInputs.cache
+C:\Users\Vinícius\Documents\Code\TestePratico\FilterTags.Service\obj\Debug\net6.0\FilterTags.Service.csproj.CopyComplete
+C:\Users\Vinícius\Documents\Code\TestePratico\FilterTags.Service\obj\Debug\net6.0\FilterTags.Service.dll
+C:\Users\Vinícius\Documents\Code\TestePratico\FilterTags.Service\obj\Debug\net6.0\refint\FilterTags.Service.dll
+C:\Users\Vinícius\Documents\Code\TestePratico\FilterTags.Service\obj\Debug\net6.0\FilterTags.Service.pdb
+C:\Users\Vinícius\Documents\Code\TestePratico\FilterTags.Service\obj\Debug\net6.0\ref\FilterTags.Service.dll

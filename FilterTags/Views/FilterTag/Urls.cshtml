@@ -1,0 +1,101 @@
+﻿@{
+    ViewData["Title"] = "Urls";
+    Layout = "_Layout";
+}
+
+
+<body>
+    <div id="main1"class="main">
+        <div class="icone">
+            <a class="fa fa-info-circle label-helper"
+               title="Busca as Urls Armazenadas no Banco!">
+            </a>
+        </div>
+        <div class="form-group has-search">
+            <span class="fa fa-search form-control-feedback"></span>
+            <input type="search" class="form-control" id="search" placeholder="Buscar Urls" href="javascript:void(0);" >
+
+        </div>
+
+        <div id="searchResult"></div>
+        
+
+    </div>
+    <div id="searchResultTags"></div>
+</body>
+
+<script>
+
+    function closeResult() {
+        $("#searchResult").css("display", "none");
+        $("body").css("height", "100vh");
+        //$("#footerF").css("display", "block");
+    }
+
+    function closeResultTags()
+    {
+        $("#searchResultTags").css("display", "none");
+        $("#main1").css("display", "block");
+    }
+
+    const search = document.getElementById("search");
+
+    search.addEventListener("input", function () {
+        $("#searchResult").css("display", "block");
+        Search();
+    });
+
+    var pagination = 0;
+    var pagina = 1;
+    function Search(valor) {
+        console.log(valor)
+        if(valor == "next")
+        {
+            pagina = pagina +1;
+            pagination = pagination  + 5;
+        }
+        else if (valor == "last"){
+            pagina = pagina - 1;
+            if (pagination != 0)
+                pagination = pagination - 5;
+        }
+        else
+        {
+            pagination=0
+            pagina=1
+        }
+
+        var textPagina = "Página : " + pagina + " de " ;
+        var url = document.getElementById("search").value;
+
+        $.ajax({
+            url: '/FilterTag/GetUrls',
+            method: 'Get',
+            data: {
+                url: url,
+                pagina: pagination
+            },
+            success: function (data) {
+                if (!data.success && data.message != null) {
+
+                    Swal.fire({ title: "Error buscar Urls!", text: data.message, type: "error" });
+                }
+
+                //$("#footerF").css("display", "none");
+                $("body").css("height", "120vh");
+                $("#searchResult").html(data);
+                document.getElementById("pagina").innerText = textPagina;
+
+            },
+            error: function (data) {
+
+                Swal.fire({ title: "Error buscar Urls!", text: data.message, type: "error" });
+            }
+
+        });
+
+
+    }
+
+
+</script>

@@ -1,0 +1,70 @@
+﻿@{
+    ViewData["Title"] = "Buscar tags";
+    Layout = "_Layout";
+}
+<div class="main">
+        
+    <div class="icone">
+        <a class="fa fa-info-circle label-helper"
+            title="Informe a url que deseja verificar quantas tags html existem.">
+        </a>
+    </div>
+    <div class="form-group has-search">
+        <span class="fa fa-search form-control-feedback"></span>
+        <input type="search" class="form-control" id="search" placeholder="Buscar Tags" href="javascript:void(0);" onkeypress="handleKeyPress(event)">
+
+    </div>
+
+    <div id="searchResult"></div>
+
+</div>
+
+<script>
+
+    function closeResult() {
+        $("#searchResult").css("display", "none");
+        $("body").css("height", "100vh");
+        //$("#footerF").css("display", "block");
+    }
+
+
+    function handleKeyPress(event) {
+        if (event.keyCode === 13 || event.which === 13) {
+            $("#searchResult").css("display", "block");;
+            Search();
+
+        }
+    }
+
+    function Search() {
+
+        var url = document.getElementById("search").value;
+        $.ajax({
+            url: '/FilterTag/GetTags',
+            method: 'Get',
+            data: {
+                url: url
+            },
+            success: function (data) {
+                if (!data.success && data.message != null) {
+
+                    Swal.fire({ title: "Error buscar tags!", text: data.message, type: "error" });
+                }
+
+                //$("#footerF").css("display", "none");
+                $("body").css("height", "120vh");
+                $("#searchResult").html(data);
+
+            },
+            error: function (data) {
+
+                Swal.fire({ title: "Error buscar tags!", text: data.message, type: "error" });
+            }
+
+        });
+
+
+    }
+
+
+</script>

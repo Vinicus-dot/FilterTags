@@ -1,0 +1,118 @@
+﻿@using FilterTags.Model.Models
+@model FilterTag
+
+
+    <div class="header">
+        <a>
+            URL:
+            <span>@Model.Url</span>
+        
+        </a>
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close" href="javascript:void(0);"  onclick="closeResult()">
+            <span aria-hidden="true">×</span>
+        </button>
+    </div>
+
+    <table id="tabela-dados" class="table tableResultTag">
+        <thead>
+            <tr>
+
+                <th scope="col">Tag</th>
+                <th scope="col">Quantidade</th>
+
+            </tr>
+        </thead>
+
+        <tbody>
+            @*@if (Model.Tags != null)
+            {
+                foreach (var tag in Model.Tags)
+                {
+                    <tr>
+                        <td><p>@tag.Key</p></td>
+                        <td><p>@tag.Value</p></td>
+                    </tr>
+                }
+            }*@
+        </tbody>
+        
+    </table>
+    <div class="col-lg-12 text-right" style="margin-top: 30px;">
+    <a data-toggle="m-tooltip" title="" data-original-title="Salvar" href="javascript:void(0);" onclick="SaveTags()" class="btn btn-info m-btn--pill m-btn--wide">
+            Salvar
+        </a>
+    </div>
+
+<script>
+    function SaveTags() {
+
+        Swal.fire({
+            title: 'Tem certeza?',
+            text: 'Essa ação não pode ser revertida, verifique todos os dados!',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Sim, save!',
+            cancelButtonText: 'Não, cancele!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+
+                $.ajax({
+                    url: '/FilterTag/SaveTags',
+                    type: "POST",
+                    data: {
+                        data: JSON.stringify(@Html.Raw(Json.Serialize(Model)))
+                    },
+                    success: function (data) {
+                        if (data.success) {
+                            Swal.fire({
+                                title: "Sucesso!",
+                                text: data.message,
+                                type: "success",
+                                timer: 30000
+                            }, function () { }).then(function () {
+                                window.location.reload();
+                            });
+                        } else {
+                            Swal.fire({ title: "Falha ao salvar Tags", text: data.message, type: "error" });
+                        }
+                    },
+                    error: function (data) {
+                        Swal.fire({ title: "Falha ao salvar Tags", text: data.message, type: "error" });
+                    }
+                });
+
+            }
+
+        })
+    }
+
+
+        var dadosArray = [];
+        @if (Model.Tags != null)
+        {
+            foreach (var tag in Model.Tags)
+            {
+                @:dadosArray.push({ "Tag": "@tag.Key", "Quantidade": @tag.Value });
+            }
+        }
+
+    
+        $(document).ready(function () {
+            $('#tabela-dados').pagination({
+                dataSource: dadosArray,
+                pageSize: 5,
+                callback: function (data, pagination) {
+                    renderTable(data);
+                }
+            });
+
+            function renderTable(data) {
+                var html = '';
+                $.each(data, function (index, item) {
+                    html += '<tr><td>' + item.Tag + '</td><td>' + item.Quantidade + '</td></tr>';
+                });
+                $('#tabela-dados tbody').html(html);
+            }
+        });
+
+</script>

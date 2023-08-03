@@ -1,0 +1,85 @@
+﻿@using FilterTags.Model.Models
+
+@model List<FilterTag>
+
+
+
+<div class="header">
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close" href="javascript:void(0);" onclick="closeResult()">
+        <span aria-hidden="true">×</span>
+    </button>
+</div>
+
+<span>
+    <a id="pagina"> </a><a>@ViewBag.Amount</a>
+</span>
+<table class="table tableResultTag">
+    <thead>
+        <tr>
+
+            <th scope="col">Url</th>
+
+        </tr>
+    </thead>
+
+    <tbody>
+        @if(Model != null && Model.Any())
+        {
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td><a href="javascript:void(0);" onclick="GetUrlsTags(@item.Id,'@item.Url')">@item.Url</a></td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>
+
+<nav aria-label="Page navigation example">
+    <ul class="pagination">
+        @if (!ViewBag.StopPaginationLast)
+        {
+            <li class="page-item"><a class="page-link" href="#" id="anterior" onclick="Search('last')">Anterior</a></li>
+        }
+
+        @if (!ViewBag.StopPaginationNext)
+        {
+            <li class="page-item"><a class="page-link" href="#" id="proximo" onclick="Search('next')">Próxima</a></li>
+        }
+
+    </ul>
+</nav>
+
+
+<script>
+    function GetUrlsTags(url_id,url) {
+        
+        $.ajax({
+            url: '/FilterTag/GetUrlsTags',
+            method: 'Get',
+            data: {
+                url_id: url_id,
+                url: url
+            },
+            success: function (data) {
+                if (!data.success && data.message != null) {
+
+                    Swal.fire({ title: "Error buscar tags!", text: data.message, type: "error" });
+                }
+
+                $("#main1").css("display", "none");
+                $("#searchResultTags").css("display", "block");
+                $("body").css("height", "120vh");
+                $("#searchResultTags").html(data);
+
+            },
+            error: function (data) {
+
+                Swal.fire({ title: "Error buscar tags!", text: data.message, type: "error" });
+            }
+
+        });
+
+
+    }
+</script>
